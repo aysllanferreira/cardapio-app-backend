@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const categorySchema = new mongoose.Schema({
-  name: {
+  category: {
     type: String,
     required: true,
     unique: 'Category name already exists',

@@ -146,7 +146,12 @@ export const getProductById = async (req, res) => {
 
 export const addNewCategory = async (req, res) => {
   const { category } = req.body;
+  console.log(category);
   if (!category) return res.status(400).json({ message: 'No category provided' });
+
+  // Check if category already exists
+  const checkCategory = await Category.findOne({ category });
+  if (checkCategory) return res.status(400).json({ message: 'Category already exists' });
 
   try {
     const newCategory = new Category({ category });
