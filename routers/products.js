@@ -2,7 +2,7 @@
 import express from 'express';
 import {
   addProduct, getProducts, uploadImage, deleteProduct, updateProduct,
-  getProductById, addNewCategory, getCategories,
+  getProductById, addNewCategory, getCategories, deleteCategory,
 } from '../controllers/products.js';
 
 const router = express.Router();
@@ -15,5 +15,6 @@ router.put('/update', updateProduct);
 router.get('/getId', getProductById);
 router.post('/addCategory', addNewCategory);
 router.get('/getCategories', getCategories);
+router.delete('/deleteCategory', deleteCategory);
 
 export default router;

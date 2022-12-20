@@ -170,3 +170,16 @@ export const getCategories = async (req, res) => {
     res.status(404).json({ message: err.message });
   }
 };
+
+export const deleteCategory = async (req, res) => {
+  const { id } = req.headers;
+  const getId = id;
+  if (!getId) return res.status(400).json({ message: 'No category id provided' });
+
+  try {
+    await Category.findByIdAndDelete(getId);
+    res.status(200).json({ message: 'Category deleted successfully' });
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
