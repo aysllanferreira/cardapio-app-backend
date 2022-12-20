@@ -3,6 +3,7 @@
 import Multer from 'multer';
 import fs from 'fs';
 import Product, { validateProduct } from '../models/products.js';
+import Category from '../models/category.js';
 
 const storage = Multer.diskStorage({
   destination(req, file, cb) {
@@ -140,5 +141,18 @@ export const getProductById = async (req, res) => {
     res.status(200).json(product);
   } catch (err) {
     res.status(404).json({ message: err.message });
+  }
+};
+
+export const addNewCategory = async (req, res) => {
+  const { category } = req.body;
+  if (!category) return res.status(400).json({ message: 'No category provided' });
+
+  try {
+    const newCategory = new Category({ category });
+    await newCategory.save();
+    res.status(201).json(newCategory);
+  } catch (err) {
+    res.status(409).json({ message: err.message });
   }
 };
